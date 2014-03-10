@@ -18,12 +18,24 @@ var co = require('co');
 
 var slice = Array.prototype.slice;
 
-module.exports = function (obj) {
+/**
+ * Expose `any`
+ */
+
+module.exports = any;
+
+/**
+ * Execute thunks in parallel and return after any of them return
+ * support
+ *   any(f1, f2, f3)
+ *   any([f1, f2, f3])
+ * @return {Thunk}
+ * @api public
+ */
+
+function any(obj) {
   var ctx = this;
 
-  // support
-  //  any(fun1, fun2)
-  //  any([fun1, fun2])
   if (typeof obj === 'function') {
     obj = slice.call(arguments);
   }

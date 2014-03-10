@@ -1,4 +1,4 @@
-co-any
+co-any [![Build Status](https://travis-ci.org/dead-horse/co-any.png)](https://travis-ci.org/dead-horse/co-any)
 ======
 
 Execute thunks in parallel and return after any of them return
@@ -18,11 +18,6 @@ var generators = [wait(200), wait(100), wait(300)];
 yield any(generators);
 // or
 yield any(wait(50), wait(100));
-```
-
-```
-var generators = [wait(200), wait(100), wait(300)];
-yield any(generators);
 ```
 
 also you can pass `thunk`, `generatorFunction` and `promise` into any.

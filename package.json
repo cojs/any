@@ -1,11 +1,12 @@
 {
   "name": "co-any",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Execute thunks in parallel and return after any of them return",
   "main": "index.js",
   "scripts": {
     "test": "make test"
   },
+  "files": ["index.js"],
   "repository": {
     "type": "git",
     "url": "git://github.com/dead-horse/co-any.git"

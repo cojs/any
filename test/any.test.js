@@ -68,7 +68,7 @@ describe('co-any', function () {
         yield any([1, 2]);
         should(false).to.be.ok; // wont exec
       } catch (err) {
-        err.message.should.equal('co.any accept only generator, generatorFunction, thunk, promise');
+        err.message.should.equal('co.any only accept yieldables');
       }
     }));
   });

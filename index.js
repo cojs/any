@@ -10,7 +10,7 @@
  * Module dependencies.
  */
 
-var co = require('co');
+var toThunk = require('back-to-thunk');
 
 /**
  * slice() reference.
@@ -64,7 +64,9 @@ function any(obj) {
       if (finished) return;
       try {
         fn = toThunk(fn, ctx);
-
+        if (typeof fn !== 'function') {
+          done(new Error('co.any only accept yieldables'));
+        }
         fn.call(ctx, function(err, res) {
           if (finished) return;
           finished = true;
@@ -84,75 +86,4 @@ function any(obj) {
       }
     }
   }
-}
-
-function toThunk(obj, ctx) {
-  if (isGeneratorFunction(obj)) {
-    return co(obj.call(ctx));
-  }
-
-  if (isGenerator(obj)) {
-    return co(obj);
-  }
-
-  if (isPromise(obj)) {
-    return promiseToThunk(obj);
-  }
-
-  if ('function' === typeof obj) {
-    return obj;
-  }
-  throw new Error('co.any accept only generator, generatorFunction, thunk, promise');
-}
-
-/**
- * Convert `promise` to a thunk.
- *
- * @param {Object} promise
- * @return {Function}
- * @api private
- */
-
-function promiseToThunk(promise) {
-  return function(fn){
-    promise.then(function(res) {
-      fn(null, res);
-    }, fn);
-  }
-}
-
-/**
- * Check if `obj` is a promise.
- *
- * @param {Object} obj
- * @return {Boolean}
- * @api private
- */
-
-function isPromise(obj) {
-  return obj && 'function' == typeof obj.then;
-}
-
-/**
- * Check if `obj` is a generator.
- *
- * @param {Mixed} obj
- * @return {Boolean}
- * @api private
- */
-
-function isGenerator(obj) {
-  return obj && 'function' == typeof obj.next && 'function' == typeof obj.throw;
-}
-
-/**
- * Check if `obj` is a generator function.
- *
- * @param {Mixed} obj
- * @return {Boolean}
- * @api private
- */
-
-function isGeneratorFunction(obj) {
-  return obj && obj.constructor && 'GeneratorFunction' == obj.constructor.name;
 }

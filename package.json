@@ -1,6 +1,6 @@
 {
   "name": "co-any",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Execute thunks in parallel and return after any of them return",
   "main": "index.js",
   "scripts": {

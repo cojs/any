@@ -1,5 +1,7 @@
-co-any [![Build Status](https://travis-ci.org/dead-horse/co-any.png)](https://travis-ci.org/dead-horse/co-any)
+co-any
 ======
+
+[![Build Status](https://travis-ci.org/cojs/any.svg)](https://travis-ci.org/cojs/any)
 
 Execute thunks in parallel and return after any of them return
 
